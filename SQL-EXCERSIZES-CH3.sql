@@ -33,12 +33,12 @@ AND InvoiceTotal <= 10000
 SELECT VendorContactLName +', ' +VendorContactFName AS "Full Name" 
 FROM Vendors
 WHERE VendorContactLName LIKE '[A, B,C,E]%'
-ORDER BY VendorContactLName, VendorContactFName
+ORDER BY VendorContactLName, VendorContactFName;
 
 -- 7.
 SELECT * FROM Invoices 
 WHERE InvoiceTotal - PaymentTotal - CreditTotal > 0 AND PaymentDate IS NOT NULL
-OR InvoiceTotal - PaymentTotal - CreditTotal = 0 AND PaymentDate IS NULL
+OR InvoiceTotal - PaymentTotal - CreditTotal = 0 AND PaymentDate IS NULL;
 
 
 

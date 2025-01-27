@@ -1,0 +1,14 @@
+-- 1. Write a SELECT statement that returns all columns from the Vendors table inner-joined with the Invoices table.
+USE AP
+SELECT *
+	FROM Vendors V
+JOIN Invoices I ON V.VendorID = I.VendorID
+
+-- 2. Write a SELECT statement that returns four columns: VendorName InvoiceNumber InvoiceDate Balance-- From the Vendors table From the Invoices table From the Invoices table-- InvoiceTotal minus the sum of PaymentTotal and CreditTotal-- The result set should have one row for each invoice with a non-zero balance. Sort the result set by VendorName in ascending order.SELECT DISTINCT VendorName, InvoiceNumber, InvoiceDate, InvoiceTotal - PaymentTotal - CreditTotal BalanceFROM Vendors VJOIN Invoices I ON V.VendorID = I.VendorIDWHERE InvoiceTotal - PaymentTotal - CreditTotal > 0ORDER BY VendorName -- 3. Write a SELECT statement that returns three columns: VendorName-- DefaultAccountNo AccountDescription-- From the Vendors table From the Vendors table-- From the GLAccounts table-- The result set should have one row for each vendor, with the account number and account description for that vendor’s default account number.-- Sort the result set by AccountDescription, then by VendorName.SELECT VendorName, DefaultAccountNo, AccountDescriptionFROM Vendors VJOIN GLAccounts G ON V.DefaultAccountNo = G.AccountNo ORDER BY AccountDescription, VendorName-- 4. Generate the same result set described in exercise 2, but use the implicit join syntax.SELECT DISTINCT VendorName, InvoiceNumber, InvoiceDate, InvoiceTotal - PaymentTotal - CreditTotal BalanceFROM Vendors VJOIN Invoices I ON V.VendorID = I.VendorIDWHERE InvoiceTotal - PaymentTotal - CreditTotal > 0ORDER BY VendorName -- 5. Write a SELECT statement that returns five columns from three tables, all using the following column aliases: Vendor VendorName Date InvoiceDate Number InvoiceNumber # InvoiceSequence-- LineItem InvoiceLineItemAmount column-- Assign the following aliases to the tables: v i-- Vendors table Invoices table-- li InvoiceLineItems table Sort the final result set by Vendor, Date, Number, and #.SELECT VendorName Vendor, InvoiceDate "Date", InvoiceNumber Number, InvoiceSequence "#", InvoiceLineItemAmount LineItemFROM Vendors VJOIN Invoices I ON v.VendorID = I.VendorIDJOIN InvoiceLineItems LI ON LI.InvoiceID = I.InvoiceIDORDER BY Vendor, "Date", Number, "#"-- 6.  Write a SELECT statement that returns three columns: VendorID VendorName Name From the Vendors table From the Vendors tableUSE APSELECT V.VendorID, V.VendorName, (V.VendorContactFName +' ' +V.VendorContactLName) AS "Name"FROM Vendors VJOIN Vendors V2 ON V.VendorContactFName = V2.VendorContactFNameAND V.VendorID <> V2.VendorIDORDER BY "Name"SELECT * from InvoiceLineItems-- 7.
+SELECT G.AccountNo, G.AccountDescription
+FROM GLAccounts G
+LEFT OUTER JOIN InvoiceLineItems Li
+ON G.AccountNo = Li.AccountNo
+WHERE li.AccountNo IS NULL
+ORDER BY G.AccountNo
+-- 8. 

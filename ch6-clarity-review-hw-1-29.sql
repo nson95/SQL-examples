@@ -1,0 +1,4 @@
+-- example sean going over from last night 1/29 ch 6 #7
+-- Write a SELECT statement that returns the name, city, -- and state of each vendor that’s located in a unique city and state. -- In other words, don’t include vendors that have a city and state in common with another vendor.USE APSELECT v1.VendorName, v1.VendorState, v1.VendorCity, v1.VendorID	FROM Vendors v1	WHERE v1.VendorID NOT IN (	--subquery listing all vendors using vendorid that appear duplicated		SELECT DISTINCT (v2.VendorID)		FROM Vendors v2			JOIN Vendors v3 				ON v2.VendorState = v3.VendorState				AND	v2.VendorCity = v3.VendorCity				AND v2.VendorID <> v3.VendorID			)		ORDER BY v1.VendorID, v1.VendorState, v1.VendorCityUSE APSELECT DISTINCT v2.VendorID	FROM Vendors v2		JOIN Vendors v3 		ON v2.VendorState = v3.VendorState		AND v2.VendorCity = v3.VendorCity		AND v2.VendorID <> v3.VendorID		ORDER BY v2.VendorID
+
+

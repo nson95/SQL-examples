@@ -1,0 +1,84 @@
+USE MASTER 
+GO
+
+DROP DATABASE IF EXISTS
+prsdb
+
+CREATE DATABASE prsdb
+GO
+
+USE prsdb
+GO
+CREATE TABLE [User](
+	ID			INT				IDENTITY(1,1)		PRIMARY KEY,
+	Username	VARCHAR(20)		NOT NULL			UNIQUE,
+	Password	VARCHAR(10)		NOT NULL,
+	FirstName	VARCHAR(20)		NOT NULL,
+	LastName	VARCHAR(20)		NOT NULL,
+	PhoneNumber	VARCHAR(12)		NOT NULL,
+	Email		VARCHAR(75)		NOT NULL,
+	Reviewer	BIT				NOT NULL,
+	Admin		BIT				NOT NULL,
+
+	)
+GO
+
+USE prsdb
+GO
+CREATE TABLE Vendor(
+	ID			INT				IDENTITY(1,1)		PRIMARY KEY,
+	Code		VARCHAR(10)		NOT NULL			UNIQUE,
+	Name		VARCHAR(255)	NOT NULL,
+	Address		VARCHAR(255)	NOT NULL,
+	City		VARCHAR(255)	NOT NULL,
+	"State"		VARCHAR(12)		NOT NULL,
+	Zip			VARCHAR(5)		NOT NULL,
+	PhoneNumber	VARCHAR(12)		NOT NULL,
+	Email		VARCHAR(100)	NOT NULL
+	)
+GO
+
+USE prsdb
+GO
+CREATE TABLE [Product](
+	ID			INT				IDENTITY(1,1)		PRIMARY KEY,
+	VendorID	INT				NOT NULL,
+	PartNumber	VARCHAR(50)		NOT NULL,
+	[Name]		VARCHAR(150)	NOT NULL,
+	Price		DECIMAL(10,2)	NOT NULL,
+	Unit		VARCHAR(255),
+	PhotoPath	VARCHAR(255),
+	CONSTRAINT  FK_ProductVendor Foreign KEY (VendorID)	REFERENCES	Vendor(ID)
+) 
+GO
+
+USE prsdb
+GO
+CREATE TABLE Request(
+	ID					INT				IDENTITY(1,1)		PRIMARY KEY,
+	UserID				INT				NOT NULL,
+	RequestNumber		VARCHAR(20)		NOT NULL,
+	[Description]		VARCHAR(100)	NOT NULL,
+	Justification		VARCHAR(255)	NOT NULL,
+	DateNeeded			DATE			NOT NULL,
+	DeliveryMode		VARCHAR(25)		NOT NULL,
+	[Status]			VARCHAR(12)		NOT NULL			DEFAULT 'New',
+	Total				DECIMAL(10,2)	NOT NULL			DEFAULT 0.0,
+	SubmittedDate		DATETIME		NOT NULL,
+	ReasonForRejection	VARCHAR(100),
+	CONSTRAINT  FK_RequestUser	Foreign KEY (UserID)	REFERENCES	[User](ID)
+	)
+GO
+
+USE prsdb
+GO
+CREATE TABLE LineItems(
+	ID			INT				IDENTITY(1,1)		PRIMARY KEY,
+	RequestID	INT				NOT NULL,
+	ProductID	INT				NOT NULL,
+	Quantity	INT				NOT NULL,
+	CONSTRAINT  FK_LineItemRequest	Foreign KEY (RequestID)	REFERENCES	Request(ID),
+	CONSTRAINT  FK_LineItemProduct	Foreign KEY (ProductID)	REFERENCES	[Product](ID),
+	CONSTRAINT  req_pdt				UNIQUE(RequestID, ProductID)
+) 
+GO

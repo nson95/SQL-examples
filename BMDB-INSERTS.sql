@@ -1,12 +1,12 @@
 USE BMDB
 GO
 
-INSERT INTO Movie(Title, Year, Rating, Director)
-VALUES ('Step Brothers', 2008, 'R', 'Adam McKay'),
-				('Elf', 2003, 'PG', 'Jon Favreau');
---				('Step Brothers', 2008, 'R', 'Adam McKay');
---				('Step Brothers', 2008, 'R', 'Adam McKay');
---				('Step Brothers', 2008, 'R', 'Adam McKay');
+--INSERT INTO Movie(Title, Year, Rating, Director)
+--VALUES ('Step Brothers', 2008, 'R', 'Adam McKay'),
+--				('Elf', 2003, 'PG', 'Jon Favreau');
+----				('Step Brothers', 2008, 'R', 'Adam McKay');
+----				('Step Brothers', 2008, 'R', 'Adam McKay');
+----				('Step Brothers', 2008, 'R', 'Adam McKay');
 
 
 Credits - 
@@ -15,7 +15,13 @@ Will Ferrell (1) - Buddy
 Zooey Deschanel (2) - Jovie
 Peter Dinklage (3) - Miles Finch
 
-Step Brothers (1)
+		INSERT INTO Movie(Title, Year, Rating, Director)
+VALUES		('Seven', 1995, 'R', 'David Fincher'),
+	('Bruce Almighty', 2003, 'PG-13', 'Tom Shadyac'),
+	('The Big Lebowski', 1998, 'R', 'The Cohen Brothers'),
+	('O Brother, Where Art Thou', 2000, 'PG-13', 'The Cohen Brothers'),
+	('Step Brothers', 2008, 'R', 'Adam McKay'),
+		('Elf', 2003, 'PG', 'Jon Favreau');
 
 INSERT INTO Actor(FirstName, LastName, Gender, DOB)
 VALUES ('Will', 'Ferrell', 'M', '1967-07-16'),
@@ -50,7 +56,7 @@ VALUES  (2, 1, 'Buddy'),
 		(3, 8, 'Tracy Mills'),
 		(4, 9, 'Bruce Nolan'),
 		(4, 7, 'God'),
-		(4, 10, 'Evan Baxter')
+		(4, 10, 'Evan Baxter'),
 		(5, 11, 'The Dude'),
 		(5, 12, 'Walter Sobchak'),
 		(5, 13, 'Theodore Donald Kerabatsos'),
@@ -64,11 +70,3 @@ VALUES  (2, 1, 'Buddy'),
 		SELECT * FROM MOVIE
 		SELECT * FROM Actor
 		
-
-		INSERT INTO Movie(Title, Year, Rating, Director)
-VALUES		('Seven', 1995, 'R', 'David Fincher'),
-	('Bruce Almighty', 2003, 'PG-13', 'Tom Shadyac'),
-	('The Big Lebowski', 1998, 'R', 'The Cohen Brothers'),
-	('O Brother, Where Art Thou', 2000, 'PG-13', 'The Cohen Brothers'),
-	('Step Brothers', 2008, 'R', 'Adam McKay'),
-		('Elf', 2003, 'PG', 'Jon Favreau');
